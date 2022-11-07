@@ -88,7 +88,7 @@ package auxiliar
 // Permite usar o pacote fmt para escrever na tela
 import "fmt"
 
-// Função que escreve na tela
+// Função que escreve algo na tela
 func Escrever() {
 	fmt.Println("Escrevendo do pacote auxiliar")
 }
@@ -111,6 +111,54 @@ func main() {
 	fmt.Println("Escrevendo do arquivo main.")
 	auxiliar.Escrever()
 }
+```
+
+## Usando um pacote externo
+
+- Podemos usar pacotes externos que não são nativos do Go. Para isso, precisamos baixar o pacote usando o comando go get
+
+```go
+go get github.com/badoux/checkmail
+```
+
+O pacote é inserido no arquivo go.mod automaticamente.
+
+```bash
+go: downloading github.com/badoux/checkmail v1.2.1
+go: added github.com/badoux/checkmail v1.2.1
+```
+
+Note que baixamos o pacote checkmail na versão 1.2.1. Para usar o pacote, precisamos importá-lo no nosso arquivo main.go
+
+```go
+package main
+
+// Importa o pacote fmt e o pacote auxiliar
+
+import (
+	"modulo/auxiliar"
+	"fmt"
+	"github.com/badoux/checkmail"
+)
+
+func main() {
+	fmt.Println("Escrevendo do arquivo main.")
+	auxiliar.Escrever()
+
+	// Retorna nil que significa null.
+	err := checkmail.ValidateFormat("teste@gmail.com")
+	fmt.Println(err)
+
+```
+
+No exemplo acima armazenamos o retorno da função ValidateFormat em uma variável chamada err. Se o email for válido, o retorno será nil, caso contrário, será retornado um erro.
+
+## Removendo as dependências
+
+- Para remover as dependências, podemos usar o comando go mod tidy que remove todas as dependências que não estão sendo usadas no nosso projeto.
+
+```go
+go mod tidy
 ```
 
 [Voltar](../README.md)
