@@ -392,4 +392,202 @@ func main() {
 
 Ou seja, para não armazenar o resultado da subtração, nós usamos o \_.
 
+## Operadores em Go
+
+- Go possui os operadores aritméticos, relacionais, lógicos e de atribuição.
+
+### Operadores aritméticos
+
+- São operadores que realizam operações matemáticas.
+
+| Operador | Descrição |
+| --- | --- |
+| + | Adição |
+| - | Subtração |
+| * | Multiplicação |
+| / | Divisão |
+| % | Módulo |
+
+- Exemplos
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	soma := 3 + 5
+	subtracao := 10 - 3
+	multiplicacao := 3 * 5
+	divisao := 10 / 2
+	modulo := 20 % 5
+
+	fmt.Println("Soma: ", soma)
+	fmt.Println("Subtração: ", subtracao)
+	fmt.Println("Multiplicação: ", multiplicacao)
+	fmt.Println("Divisão: ", divisao)
+	fmt.Println("Módulo: ", modulo);
+}
+```
+
+**NOTA:** Em go, não podemos fazer operações com tipos diferentes, por exemplo, não podemos fazer 10 + 5.5, pois 10 é um inteiro e 5.5 é um float64. Não podemos somar dois inteiros com tipos diferentes, ex: int16 e int32.
+
+## Operador de atribuição
+
+- São operadores que atribuem valores a variáveis.
+
+| Operador | Descrição |
+| --- | --- |
+| = | Atribuição |
+| += | Atribuição com adição |
+| -= | Atribuição com subtração |
+| *= | Atribuição com multiplicação |
+| /= | Atribuição com divisão |
+| %= | Atribuição com módulo |
+
+- Exemplos
+
+```go
+package main
+
+import (
+  "fmt"
+)
+
+func main() {
+  var numero int8 = 10
+  numero += 20 // numero = numero + 20
+  numero -= 10 // numero = numero - 10
+  numero *= 2 // numero = numero * 2
+  numero /= 4 // numero = numero / 4
+  numero %= 3 // numero = numero % 3
+
+  fmt.Println(numero)
+}
+```
+
+## Operadores relacionais
+
+- São operadores que realizam comparações entre valores.
+
+| Operador | Descrição |
+| --- | --- |
+| == | Igual a |
+| != | Diferente de |
+| < | Menor que |
+| > | Maior que |
+| >= | Maior ou igual a |
+| <= | Menor ou igual a |
+
+- Exemplos
+
+```go
+package main
+
+import (
+  "fmt"
+)
+
+func main() {
+  fmt.Println(1 == 1) // true
+  fmt.Println(1 != 1) // false
+  fmt.Println(1 < 1) // false
+  fmt.Println(1 > 1) // false
+  fmt.Println(1 >= 1) // true
+  fmt.Println(1 <= 1) // true
+}
+```
+
+## Operadores lógicos
+
+- São operadores que realizam comparações entre valores booleanos.
+
+| Operador | Descrição |
+| --- | --- |
+| && | E |
+| \|\| | OU |
+| ! | Negação |
+
+- Exemplos
+
+```go
+package main
+
+import (
+  "fmt"
+)
+
+func main() {
+  fmt.Println(true && true) // true
+  fmt.Println(true && false) // false
+  fmt.Println(true || true) // true
+  fmt.Println(true || false) // true
+  fmt.Println(!true) // false
+}
+```
+
+## Opeardores unários
+
+- São operadores que realizam operações com apenas um operando.
+
+| Operador | Descrição |
+| --- | --- |
+| + | Sinal positivo |
+| - | Sinal negativo |
+| ++ | Incremento |
+| -- | Decremento |
+
+- Exemplos
+
+```go
+package main
+
+import (
+  "fmt"
+)
+
+func main() {
+  numero := 10
+  fmt.Println(+numero) // 10
+  fmt.Println(-numero) // -10
+  numero++
+  fmt.Println(numero) // 11
+  numero--
+  fmt.Println(numero) // 10
+}
+```
+
+## Operador ternário
+
+- O operador ternário é um operador que recebe três operandos, sendo o primeiro um valor booleano, o segundo um valor que será retornado caso o primeiro seja verdadeiro e o terceiro um valor que será retornado caso o primeiro seja falso.
+
+- Exemplo
+
+```go
+package main
+
+import (
+  "fmt"
+)
+
+func main() {
+  numero := 10
+  var resultado string
+
+  if numero > 5 {
+    resultado = "Maior que 5"
+  } else {
+    resultado = "Menor que 5"
+  }
+
+  fmt.Println(resultado)
+
+  // Usando o operador ternário
+  resultado = numero > 5 ? "Maior que 5" : "Menor que 5"
+  fmt.Println(resultado)
+}
+```
+
 [Voltar](../README.md)
