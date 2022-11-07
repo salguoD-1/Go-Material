@@ -1,5 +1,5 @@
 # Linguagem Go
 
-| Tabela de conteúdo                      |
+| Tabela de conteúdos                     |
 |-----------------------------------------|
 | [Introdução](./Conteúdos/INTRODUÇÃO.md) |
