@@ -175,4 +175,221 @@ func main() {
 }
 ```
 
+## Funções
+
+- Funções são blocos de código que realizam uma tarefa específica. Para declarar uma função, usamos a palavra reservada func seguida do nome da função, os parâmetros e o tipo de dado que a função retorna.
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// Palavra-chave func, nome da função, (n-parâmetros com cada tipo) retorno da função.
+func somar(n1 int8, n2 int8) int8 {
+	return n1 + n2
+}
+
+// Função principal
+func main() {
+	// Armazena o resultado da função.
+	soma := somar(10, 20);
+	// Exibe 30.
+	fmt.Println(soma)
+}
+```
+
+Note que a função somar recebe dois parâmetros do tipo int8 e retorna um valor do tipo int8. Para declarar uma função que não retorna nada, usamos o tipo de dado void.
+
+## Armazenando uma função em uma variável
+
+Funções podem ser armazenadas em variáveis. Para isso, basta **declarar uma variável do `tipo de dado func` e atribuir uma função a ela.**
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// Palavra-chave func, nome da função, (n-parâmetros com cada tipo) retorno da função.
+func somar(n1 int8, n2 int8) int8 {
+	return n1 + n2
+}
+
+// Função principal
+func main() {
+	// Armazena o resultado da função.
+	soma := somar(10, 20);
+	// Exibe 30.
+	fmt.Println(soma)
+
+	// Armazenando uma função em uma variável
+	var funcao = func() {
+		fmt.Println("Eu sou uma função!")
+	}
+
+	// Chamando a função
+	funcao()
+}
+```
+
+- Usando parâmetros e retornando um resultado
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// Palavra-chave func, nome da função, (n-parâmetros com cada tipo) retorno da função.
+func somar(n1 int8, n2 int8) int8 {
+	return n1 + n2
+}
+
+// Função principal
+func main() {
+	// Armazena o resultado da função.
+	soma := somar(10, 20);
+	// Exibe 30.
+	fmt.Println(soma)
+
+	// Armazenando uma função em uma variável
+	var funcao = func() {
+		fmt.Println("Eu sou uma função!")
+	}
+
+	// Chamando a função
+	funcao()
+
+	// A função funcao2 tem como parâmetro uma string e retorna uma string.
+	var funcao2 = func(txt string) string {
+		return txt;
+	}
+
+	// Chamamos a função, passamos uma string como argumento e armazenamos o seu resultado.
+	result := funcao2("Oi, eu sou uma função com parâmetro e retorno de dado :)")
+	// Exibe: Oi, eu sou uma função com parâmetro e retorno de dado :)
+	fmt.Println(result)
+}
+```
+
+## Funções em Go podem ter mais de um retorno
+
+- Para declarar uma função que retorna mais de um valor, basta separar os tipos de dados que a função retorna com vírgula.
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// Palavra-chave func, nome da função, (n-parâmetros com cada tipo) retorno da função.
+func somar(n1 int8, n2 int8) int8 {
+	return n1 + n2
+}
+
+// Podemos declarar o tipo de dado do parâmetro no final.
+// Passamos a quantidade e tipo de retorno da função entre parênteses.
+func calculosMatematicos(n1, n2 int8) (int8, int8) {
+	soma := n1 + n2
+	subtracao := n1 - n2
+	
+	// Retornamos os dois resultados.
+	return soma, subtracao
+}
+
+// Função principal
+func main() {
+	// Armazena o resultado da função.
+	soma := somar(10, 20);
+	// Exibe 30.
+	fmt.Println(soma)
+
+	// Armazenando uma função em uma variável
+	var funcao = func() {
+		fmt.Println("Eu sou uma função!")
+	}
+
+	// Chamando a função
+	funcao()
+
+	// A função funcao2 tem como parâmetro uma string e retorna uma string.
+	var funcao2 = func(txt string) string {
+		return txt;
+	}
+
+	// Chamamos a função, passamos uma string como argumento e armazenamos o seu resultado.
+	result := funcao2("Oi, eu sou uma função com parâmetro e retorno de dado :)")
+	// Exibe: Oi, eu sou uma função com parâmetro e retorno de dado :)
+	fmt.Println(result)
+
+	// Para usar a função com retorno duplo, nós separamos as variáveis
+	resultadoSoma, resultadoSubtracao := calculosMatematicos(10, 15)
+	// Exibe: 25 -5
+	fmt.Println(resultadoSoma, resultadoSubtracao)
+}
+```
+
+- **NOTA:** Se não quisermos armazenar algum resultado tipo o resultadoSoma ou resultadoSubtracao, podemos usar o underline \_ para ignorar o resultado.
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// Palavra-chave func, nome da função, (n-parâmetros com cada tipo) retorno da função.
+func somar(n1 int8, n2 int8) int8 {
+	return n1 + n2
+}
+
+// Podemos declarar o tipo de dado do parâmetro no final.
+// Passamos a quantidade e tipo de retorno da função entre parênteses.
+func calculosMatematicos(n1, n2 int8) (int8, int8) {
+	soma := n1 + n2
+	subtracao := n1 - n2
+	
+	// Retornamos os dois resultados.
+	return soma, subtracao
+}
+
+// Função principal
+func main() {
+	// Armazena o resultado da função.
+	soma := somar(10, 20);
+	// Exibe 30.
+	fmt.Println(soma)
+
+	// Armazenando uma função em uma variável
+	var funcao = func() {
+		fmt.Println("Eu sou uma função!")
+	}
+
+	// Chamando a função
+	funcao()
+
+	// A função funcao2 tem como parâmetro uma string e retorna uma string.
+	var funcao2 = func(txt string) string {
+		return txt;
+	}
+
+	// Chamamos a função, passamos uma string como argumento e armazenamos o seu resultado.
+	result := funcao2("Oi, eu sou uma função com parâmetro e retorno de dado :)")
+	// Exibe: Oi, eu sou uma função com parâmetro e retorno de dado :)
+	fmt.Println(result)
+
+	// Para usar a função com retorno duplo, nós separamos as variáveis
+	resultadoSoma, _ := calculosMatematicos(10, 15)
+	// Exibe: 25
+	fmt.Println(resultadoSoma)
+}
+```
+
+Ou seja, para não armazenar o resultado da subtração, nós usamos o \_.
+
 [Voltar](../README.md)
