@@ -5,7 +5,7 @@
 1. Go é uma linguagem extremamente eficiente
 2. É uma linguagem compilada
 3. É uma linguagem otimizada para usar mais de um núcleo do processador
-4. É uma linguagem feita para liadr muito bem com concorrência
+4. É uma linguagem feita para lidar muito bem com concorrência
 5. É uma linguagem com uma comunidade muito ativa
 6. É uma linguagem com uma [documentação](https://go.dev/doc/) ótima
 7. É uma linguagem com uma curva de aprendizado muito baixa

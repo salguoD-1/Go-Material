@@ -1103,4 +1103,164 @@ func main() {
 
 ## Maps
 
+- Maps são estruturas de dados que permitem armazenar dados do tipo chave-valor. A chave pode ser de qualquer tipo, mas o valor deve ser um tipo específico. A sintaxe para declarar um map é:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// nome_do_map := map[tipo_da_chave]tipo_dos_valores
+	usuario := map[string]string {
+		// Chave: Valor
+		"nome": "Douglas",
+		"sobrenome": "Cunha",
+	}
+	// Exibe: map[nome:Douglas sobrenome:Cunha]
+	fmt.Println(usuario)
+
+	// Acessando cada chave de forma individual
+	fmt.Println(usuario["nome"]) // Douglas
+	fmt.Println(usuario["sobrenome"]) // Cunha
+
+
+	// Usando maps aninhados
+	// Temos a chave do tipo string e o valor é uma estrutura map do tipo string-string
+	usuario2 := map[string]map[string]string {
+		// Nome é a nosas chave, e o valor é um objeto que é o segundo map.
+		"nome": {
+			"primeiro-nome": "Douglas",
+			"segundo-nome": "João",
+			"terceiro-nome": "Matheus",
+		},
+	}
+	// Exibe: map[nome:map[primeiro-nome:Douglas segundo-nome:João terceiro-nome:Matheus]]
+	fmt.Println(usuario2)
+
+	// Acessando cada valor de forma individual
+	// Usamos a notação de colchetes duplo, onde temos chave-valor.
+	fmt.Println(usuario2["nome"]["primeiro-nome"]) // Douglas
+	fmt.Println(usuario2["nome"]["segundo-nome"]) // João
+	fmt.Println(usuario2["nome"]["terceiro-nome"]) // Matheus
+
+	// Deletando uma chave usando a funão delete(nome-do-map, nome-da-chave)
+	delete(usuario2, "nome") // Deleta a chave e os valores.
+	fmt.Println(usuario2) // Exibe um map vazio. map[]
+
+	// Adicionando uma nova chave com a notação nome_do_map["nome_da_chave_nova"] = map[tipo_de_dado]tipo_de_dado
+	usuario2["aboutme"] = map[string]string {
+		"nome": "Douglas",
+	}
+
+	fmt.Println(usuario2["aboutme"]["nome"]) // Douglas
+}
+```
+
+- Em resumo: Maps são estruturas de dados que permitem armazenar dados do tipo chave-valor. A chave pode ser de qualquer tipo, mas o valor deve ser um tipo específico. A sintaxe para declarar um map é: nome_do_map := map[tipo_da_chave]tipo_dos_valores. A função delete(nome-do-map, nome-da-chave) deleta uma chave e seus valores. A notação nome_do_map["nome_da_chave_nova"] = map[tipo_de_dado]tipo_de_dado adiciona uma nova chave com um valor.
+
+## Estrutura de Controle
+
+- Estruturas de controle são utilizadas para controlar o fluxo de execução do programa. No Go, temos as seguintes estruturas de controle: if, else, switch, for, break, continue, goto, defer, panic e recover.
+
+- `Estrutura if/else`
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// Declaramos uma variável idade do tipo int e atribuimos um valor a ela.
+	idade := 18
+
+	// Analisa se a condição é verdadeira, caso seja, executa o bloco if, caso contrário executa o bloco else.
+	if idade >= 18 {
+		fmt.Println("Maior de idade!")
+	} else {
+		fmt.Println("Menor de idade")
+	}
+}
+```
+
+Em Go não é necessário usar parênteses na estrutrua if, é opcional.
+
+- `Declarando uma variável e inicializando usando if init`
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// Declaramos uma variável idade do tipo int e atribuimos um valor a ela.
+	idade := 18
+
+	// Analisa se a condição é verdadeira, caso seja, executa o bloco if, caso contrário executa o bloco else.
+	if idade >= 18 {
+		fmt.Println("Maior de idade!")
+	} else {
+		fmt.Println("Menor de idade")
+	}
+
+	// Atribuindo um novo valor a variável idade
+	idade = 17
+
+	// Primeiro declaramos uma variável e inicializamos ela, nesse caso com a variável idade.
+	// Em seguida usamos ponto e vírgula e fazemos a condição (outraIdade < 18)
+	// Caso seja true, executa o bloco abaixo.
+	if outraIdade := idade; outraIdade < 18 {
+		fmt.Println("Menor de idade!")
+	} else {
+		fmt.Println("Maior de idade!")
+	}
+
+	// Não podemos acessar a variável outraIdade fora da estrutura if.
+	// fmt.Println(outraIdade) resulta em undefined, ou seja, variável não definida.
+}
+```
+
+A estrutura if init serve para declarar e inicializar uma variável dentro da estrutura if. Essa variável só pode ser acessada dentro da estrutura if. Note que a condição é realizada na mesma linha da declaração da variável.
+
+- Usando a estrutura if, else e else if
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// Declaramos uma variável idade do tipo int e atribuimos um valor a ela.
+	idade := 18
+
+	// Analisa se a condição é verdadeira, caso seja, executa o bloco if, caso contrário executa o bloco else.
+	if idade >= 18 {
+		fmt.Println("Maior de idade!")
+	} else {
+		fmt.Println("Menor de idade")
+	}
+
+	// Atribuindo um novo valor a variável idade
+	idade = 8
+
+	// Primeiro declaramos uma variável e inicializamos ela, nesse caso com a variável idade.
+	// Em seguida usamos ponto e vírgula e fazemos a condição (outraIdade < 18)
+	// Caso seja true, executa o bloco abaixo.
+	if outraIdade := idade; outraIdade >= 18 {
+		fmt.Println("Maior de idade!")
+	} else if outraIdade < 10 {
+		// Exibe: Você tem menos de 10 anos!
+		fmt.Println("Você tem menos de 10 anos!")
+	} else {
+		fmt.Println("Menor de idade!")
+	}
+}
+```
+
+Ou sejam, a estrutura else if testa para mais de uma condição. Caso a primeira condição seja falsa, ele testa a segunda condição, caso seja falsa, ele testa a terceira condição e assim por diante.
+
+## Estrutura Switch
+
+
+
 [Voltar](../README.md)
