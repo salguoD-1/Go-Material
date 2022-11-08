@@ -807,7 +807,6 @@ func main() {
 	fmt.Println(estudanteUm)
 
 	// Para acessar as variáveis da struct pessoa basta usar a notação dot(.) seguido do nome da variável.
-
 	fmt.Println(estudanteUm.nome)
 	fmt.Println(estudanteUm.sobrenome)
 	fmt.Println(estudanteUm.idade)
@@ -818,7 +817,21 @@ func main() {
 }
 ```
 
-- Ou seja, para usarmos "herança" em Go, basta passar uma struct como valor de uma variável de outra struct. Como é o caso da struct estudante que recebeu a struct pessoa como valor. Para exibir os valores das variáveis da struct pessoa, basta usar a notação dot(.) seguido do nome da variável.
+- O resultado será:
 
+```bash
+go run heranca.go
+{Douglas Cunha de Jesus 23 172 68.5}
+{{Douglas Cunha de Jesus 23 172 68.5} Sistemas de Informação Universidade Federal de Sergipe}
+Douglas
+Cunha de Jesus
+23
+172
+68.5
+Sistemas de Informação
+Universidade Federal de Sergipe
+```
+
+- Ou seja, para usarmos "herança" em Go, basta passar uma struct como valor de uma variável de outra struct. Como é o caso da struct estudante que recebeu a struct pessoa como valor. Para exibir os valores das variáveis da struct pessoa, basta usar a notação dot(.) seguido do nome da variável.
 
 [Voltar](../README.md)
