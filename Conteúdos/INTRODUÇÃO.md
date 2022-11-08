@@ -13,6 +13,10 @@
 9. É uma linguagem com uma sintaxe muito próxima de C, C++ e Java, facilitando muito a transição de uma linguagem para outra.
 10. É uma linguagem criada pela Google.
 
+## Instalando Go no seu computador
+
+Para instalar Go no seu computador, você pode seguir o tutorial oficial da linguagem [aqui](https://go.dev/doc/).
+
 ## Hello World em Go
 
 ```go
@@ -45,9 +49,9 @@ A função main é a função principal de um programa em Go. Ela é a primeira 
 
 fmt é um pacote que contém funções para formatar e imprimir dados.
 
-## O que é println?
+## O que é Println?
 
-println é uma função que imprime uma linha de texto na tela. Ela faz parte do pacote fmt.
+Println é uma função que imprime uma linha de texto na tela. Ela faz parte do pacote fmt.
 
 ## Criando um módulo para armazenar os nossos pacotes
 
