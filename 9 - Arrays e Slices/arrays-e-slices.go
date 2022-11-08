@@ -62,4 +62,39 @@ func main() {
 	array2[1] = "Posição alterada"
 	// Exibe: [Posição alterada Posição 3]
 	fmt.Println(slice2)
+
+	// A função make aloca espaço na memória do computador para uma determinada coisa do nosso programa.
+	// A função make possui três parâmetros: []tipo_de_dado, quantidade_de_itens e quantidade_maxima_de_itens
+	slice3 := make([]float32, 10, 11)
+	// Exibe: [0 0 0 0 0 0 0 0 0 0]
+	fmt.Println(slice3)
+
+	// Usando a função len() para saber o total de elementos presentes no array
+	fmt.Println(len(slice3)) // Retorna 10
+
+	// Usando a função cap() para saber a capacidade máxima de elementos que o array suporta
+	fmt.Println(cap(slice3)) // Retorna 11
+
+	// Estourando a capacidade máxima do slice3
+	slice3 = append(slice3, 11)
+	// Exibe: [0 0 0 0 0 0 0 0 0 0 11]
+	fmt.Println(slice3)
+	fmt.Println(len(slice3)) // Retorna 11
+	fmt.Println(cap(slice3)) // Retorna 11
+
+	// Adicionando mais um elemento no array temos
+	slice3 = append(slice3, 12)
+	// Exibe: [0 0 0 0 0 0 0 0 0 0 11 12]
+	fmt.Println(slice3)
+	fmt.Println(len(slice3)) // Retorna 12
+	// Note que retornou 24. Quando o slice é "estourado", o Go dobra a capacidade máxima do array baseado na quantidade de elementos no array.
+	fmt.Println(cap(slice3)) // Retorna 24
+
+	// Caso a gente omita a capacidade máxima, temos que a capacidade máxima será igual ao tamanho do array.
+	slice4 := make([]int, 5)
+	// Exibe: [0 0 0 0 0]
+	fmt.Println(slice4)
+	fmt.Println(len(slice4)) // Retorna 5
+	fmt.Println(cap(slice4)) // Retorna 5
+
 }
