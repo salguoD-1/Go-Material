@@ -834,4 +834,166 @@ Universidade Federal de Sergipe
 
 - Ou seja, para usarmos "herança" em Go, basta passar uma struct como valor de uma variável de outra struct. Como é o caso da struct estudante que recebeu a struct pessoa como valor. Para exibir os valores das variáveis da struct pessoa, basta usar a notação dot(.) seguido do nome da variável.
 
+## Ponteiros
+
+- Ponteiros são variáveis que armazenam o endereço de memória de outra variável.
+
+- Exemplo
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var variavel1 int = 10
+	// Armazena o valor da variável1
+	var variavel2 int = variavel1
+
+	fmt.Println(variavel1, variavel2)
+
+	// Incrementamos uma unidade a variável1
+	variavel1++
+	// A variável2 não será 11 pois a variável1 é apenas uma cópia.
+	fmt.Println(variavel1, variavel2)
+
+	// Para resolver esse problema podemos utilizar ponteiros, que são uma referência de memória.
+	var variavel3 int
+	// Criamos um ponteiro utilizando a notação * na frente do tipo.
+	var ponteiro *int
+
+	variavel3 = 100
+	// O operador & serve para indicar o lugar da memória em que a variável3 está armazenada.
+	ponteiro = &variavel3
+	// Exibe o endereço de memória da variável3
+	fmt.Println(variavel3, ponteiro)
+
+	// Para exibir o valor da variável, basta colocar um * na variável ponteiro
+	fmt.Println(variavel3, *ponteiro) // Exibe 100
+}
+```
+
+- Ou seja, ponteiros são úteis para quando queremos alterar o valor de uma variável que está em outro lugar da memória. Para isso é só criar um ponteiro usando a notação \* na frente do tipo da variável e atribuir o endereço de memória da variável que queremos alterar usando a notação \&. Para exibir o valor da variável, basta colocar um \* na variável ponteiro.
+
+## Arrays e Slices
+
+- Arrays e Slices são estruturas de dados que armazenam uma coleção de valores do mesmo tipo. Além disso, é necessário definir o tamanho do array ou slice.
+
+- Exemplo
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// var nome_do_array[tamanho do array] tipo do array
+	var array1[5] int
+	// Exibe: [0 0 0 0 0]
+	fmt.Println(array1)
+
+	// Populando o array
+	array1[0] = 1
+	array1[1] = 2
+	array1[2] = 3
+	array1[3] = 4
+	array1[4] = 5
+	// Exibe: [1 2 3 4 5]
+	fmt.Println(array1)
+
+	// Podemos declarar arrays usando inferência de tipo
+	array2 := [5] string {
+		"Posição1", "Posição 2", "Posição 3", "Posição 4", "Posição 5",
+	}
+
+	// Exibe: [Posição1 Posição 2 Posição 3 Posição 4 Posição 5]
+	fmt.Println(array2)
+
+	// Outra forma de declarar um array é usando o "operador spread" semelhante a do JavaScript que calcula automaticamente o tamanho do array.
+	array3 := [...] int {
+		1,
+		2,
+		3,
+		4,
+		5,
+	}
+	// Exibe: [1 2 3 4 5]
+	fmt.Println(array3)
+}
+```
+
+- Usando slice
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// var nome_do_array[tamanho do array] tipo do array
+	var array1[5] int
+	// Exibe: [0 0 0 0 0]
+	fmt.Println(array1)
+
+	// Populando o array
+	array1[0] = 1
+	array1[1] = 2
+	array1[2] = 3
+	array1[3] = 4
+	array1[4] = 5
+	// Exibe: [1 2 3 4 5]
+	fmt.Println(array1)
+
+	// Podemos declarar arrays usando inferência de tipo
+	array2 := [5] string {
+		"Posição1", "Posição 2", "Posição 3", "Posição 4", "Posição 5",
+	}
+
+	// Exibe: [Posição1 Posição 2 Posição 3 Posição 4 Posição 5]
+	fmt.Println(array2)
+
+	// Outra forma de declarar um array é usando o "operador spread" semelhante a do JavaScript que calcula automaticamente o tamanho do array.
+	array3 := [...] int {
+		1,
+		2,
+		3,
+		4,
+		5,
+	}
+	// Exibe: [1 2 3 4 5]
+	fmt.Println(array3)
+
+	// Array slice com 5 valores do tipo string
+	slice := [] string {
+		"Slice 1",
+		"Slice 2",
+		"Slice 3",
+		"Slice 4",
+		"Slice 5",
+	}
+
+	// Exibe: [Slice 1 Slice 2 Slice 3 Slice 4 Slice 5]
+	fmt.Println(slice)
+
+	// Usando a função append(slice, valor) para adicionar valores no slice. A função retorna um slice novo com o item incluido.
+	slice = append(slice, "Slice 6")
+	// Exibe: [Slice 1 Slice 2 Slice 3 Slice 4 Slice 5 Slice 6]
+	fmt.Println(slice)
+
+	// Usando o slice para "fatiar" o array da posição 1(inclusivo) até a 3(menos a 3 "exclusivo").
+	slice2 := array2[1:3]
+	// Exibe: [Posição 2 Posição 3]
+	fmt.Println(slice2)
+
+	// Alterando o valor do array2
+	array2[1] = "Posição alterada"
+	// Exibe: [Posição alterada Posição 3]
+	fmt.Println(slice2)
+}
+```
+
+- Ou seja, podemos criar um slice a partir de um array, e o slice é uma referência do array, ou seja, se alterarmos o valor do array, o slice também será alterado. Ele funciona como um ponteiro. Note que usamos a notação \[1:3\] para indicar que queremos o slice a partir da posição 1 até a posição 3, mas sem incluir a posição 3.
+
 [Voltar](../README.md)
+
+- Arrays internos
