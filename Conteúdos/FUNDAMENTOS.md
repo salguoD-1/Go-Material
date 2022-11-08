@@ -992,8 +992,8 @@ func main() {
 }
 ```
 
-- Ou seja, podemos criar um slice a partir de um array, e o slice é uma referência do array, ou seja, se alterarmos o valor do array, o slice também será alterado. Ele funciona como um ponteiro. Note que usamos a notação \[1:3\] para indicar que queremos o slice a partir da posição 1 até a posição 3, mas sem incluir a posição 3.
+- **Ou seja, podemos criar um slice a partir de um array, e o slice é uma referência do array, ou seja, se alterarmos o valor do array, o slice também será alterado. Ele funciona como um ponteiro. Note que usamos a notação \[1:3\] para indicar que queremos o slice a partir da posição 1 até a posição 3, mas sem incluir a posição 3.**
+
+- **Arrays internos**
 
 [Voltar](../README.md)
-
-- Arrays internos
