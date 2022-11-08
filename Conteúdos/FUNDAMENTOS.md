@@ -297,7 +297,7 @@ func somar(n1 int8, n2 int8) int8 {
 func calculosMatematicos(n1, n2 int8) (int8, int8) {
 	soma := n1 + n2
 	subtracao := n1 - n2
-	
+
 	// Retornamos os dois resultados.
 	return soma, subtracao
 }
@@ -353,7 +353,7 @@ func somar(n1 int8, n2 int8) int8 {
 func calculosMatematicos(n1, n2 int8) (int8, int8) {
 	soma := n1 + n2
 	subtracao := n1 - n2
-	
+
 	// Retornamos os dois resultados.
 	return soma, subtracao
 }
@@ -400,13 +400,13 @@ Ou seja, para não armazenar o resultado da subtração, nós usamos o \_.
 
 - São operadores que realizam operações matemáticas.
 
-| Operador | Descrição |
-| --- | --- |
-| + | Adição |
-| - | Subtração |
-| * | Multiplicação |
-| / | Divisão |
-| % | Módulo |
+| Operador | Descrição     |
+| -------- | ------------- |
+| +        | Adição        |
+| -        | Subtração     |
+| \*       | Multiplicação |
+| /        | Divisão       |
+| %        | Módulo        |
 
 - Exemplos
 
@@ -438,14 +438,14 @@ func main() {
 
 - São operadores que atribuem valores a variáveis.
 
-| Operador | Descrição |
-| --- | --- |
-| = | Atribuição |
-| += | Atribuição com adição |
-| -= | Atribuição com subtração |
-| *= | Atribuição com multiplicação |
-| /= | Atribuição com divisão |
-| %= | Atribuição com módulo |
+| Operador | Descrição                    |
+| -------- | ---------------------------- |
+| =        | Atribuição                   |
+| +=       | Atribuição com adição        |
+| -=       | Atribuição com subtração     |
+| \*=      | Atribuição com multiplicação |
+| /=       | Atribuição com divisão       |
+| %=       | Atribuição com módulo        |
 
 - Exemplos
 
@@ -472,14 +472,14 @@ func main() {
 
 - São operadores que realizam comparações entre valores.
 
-| Operador | Descrição |
-| --- | --- |
-| == | Igual a |
-| != | Diferente de |
-| < | Menor que |
-| > | Maior que |
-| >= | Maior ou igual a |
-| <= | Menor ou igual a |
+| Operador | Descrição        |
+| -------- | ---------------- |
+| ==       | Igual a          |
+| !=       | Diferente de     |
+| <        | Menor que        |
+| >        | Maior que        |
+| >=       | Maior ou igual a |
+| <=       | Menor ou igual a |
 
 - Exemplos
 
@@ -505,10 +505,10 @@ func main() {
 - São operadores que realizam comparações entre valores booleanos.
 
 | Operador | Descrição |
-| --- | --- |
-| && | E |
-| \|\| | OU |
-| ! | Negação |
+| -------- | --------- |
+| &&       | E         |
+| \|\|     | OU        |
+| !        | Negação   |
 
 - Exemplos
 
@@ -532,12 +532,12 @@ func main() {
 
 - São operadores que realizam operações com apenas um operando.
 
-| Operador | Descrição |
-| --- | --- |
-| + | Sinal positivo |
-| - | Sinal negativo |
-| ++ | Incremento |
-| -- | Decremento |
+| Operador | Descrição      |
+| -------- | -------------- |
+| +        | Sinal positivo |
+| -        | Sinal negativo |
+| ++       | Incremento     |
+| --       | Decremento     |
 
 - Exemplos
 
@@ -589,5 +589,236 @@ func main() {
   fmt.Println(resultado)
 }
 ```
+
+## Structs
+
+- Structs são estruturas de dados que podem armazenar vários tipos de dados.
+
+- Structs são o mais próximo que temos de classes em go.
+
+- Exemplo
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// Estrutura do tipo usuario
+type usuario struct {
+  nome string
+  idade uint8
+  email string
+}
+
+// Função principal
+func main() {
+	// Declaramos uma variável chamada user do tipo usuario.
+  var user usuario
+	// Usamos a notação dot(.) para acessar cada variável da estrutura e atribuimos um valor.
+  user.nome = "Douglas"
+  user.idade = 23
+  user.email = "douglas@email.com"
+
+	// Exibe o resultado de cada variável
+	fmt.Println(user.email)
+	fmt.Println(user.idade)
+	fmt.Println(user.email)
+}
+```
+
+No exemplo acima declaramos uma variável do tipo usuario, que é uma estrutura que contém três variáveis, nome, idade e email. Para acessar cada uma dessas variáveis, usamos a notação dot(.) e atribuímos um valor a cada uma delas. Para exibir o valor de cada variável, usamos a notação dot(.) novamente.
+
+- **NOTA:** Caso não passemos nenhum valor para as variáveis da estrutura, temos que o resultado de cada variável será o valor padrão do tipo de dado que ela armazena.
+
+- Exemplo
+
+```go
+package main
+
+import (
+  "fmt"
+)
+
+// Estrutura do tipo usuario
+type usuario struct {
+  nome string
+  idade uint8
+  email string
+}
+
+// Função principal
+func main() {
+  // Declaramos uma variável chamada user do tipo usuario.
+  var user usuario
+
+  // Exibe o resultado de cada variável
+  fmt.Println(user.nome) // ""
+  fmt.Println(user.idade) // 0
+  fmt.Println(user.email) // ""
+}
+```
+
+- Podemos declarar uma variável do tipo usuario e atribuir valores a cada uma das variáveis da estrutura usando a notação de inferência de tipo.
+
+```go
+package main
+
+import (
+  "fmt"
+)
+
+// Estrutura do tipo usuario
+type usuario struct {
+  nome string
+  idade uint8
+  email string
+}
+
+// Função principal
+func main() {
+  // Declaramos uma variável chamada user do tipo usuario e atribuímos valores a cada uma das variáveis da estrutura.
+  user := usuario{
+    nome: "Douglas",
+    idade: 23,
+    email: "douglas@email.com"
+  }
+
+  // Exibe o resultado de cada variável
+  fmt.Println(user.nome) // Douglas
+  fmt.Println(user.idade) // 23
+  fmt.Println(user.email) // douglas@email.com
+}
+```
+
+Note que a notação é semelhante a de um **objeto em JavaScript.**
+
+## Podemos ter structs dentro de structs
+
+- Exemplo
+
+```go
+package main
+
+import (
+  "fmt"
+)
+
+// Estrutura do tipo usuario
+type usuario struct {
+  nome string
+  idade uint8
+  email string
+  endereco endereco
+}
+
+// Estrutura do tipo endereco
+type endereco struct {
+  logradouro string
+  numero uint8
+}
+
+// Função principal
+func main() {
+  // Declaramos uma variável chamada user do tipo usuario e atribuímos valores a cada uma das variáveis da estrutura.
+  user := usuario{
+    nome: "Douglas",
+    idade: 23,
+    email: "douglas@email.com",
+    // Atribuímos valores a cada uma das variáveis da estrutura endereco.
+    endereco: endereco{
+      logradouro: "Rua aprendendo Go",
+      numero: 13,
+    },
+  }
+
+  // Exibe o resultado de cada variável
+  fmt.Println(user.nome) // Douglas
+  fmt.Println(user.idade) // 23
+  fmt.Println(user.email) // douglas@email.com
+  fmt.Println(user.endereco.logradouro) // Rua aprendendo Go
+  fmt.Println(user.endereco.numero) // 13
+}
+```
+
+- Exibindo o resultado:
+
+```bash
+go run structs.go
+Douglas
+23
+douglas@email.com
+Rua aprendendo Go
+13
+```
+
+- Note que passamos o valor de cada variável da estrutura endereco dentro da estrutura usuario. Para acessar cada uma das variáveis da estrutura endereco, usamos a notação dot(.) novamente. Note também que criamos uma variável chamada endereco do tipo endereco e atribuímos valores a cada uma das variáveis da estrutura.
+
+## Heranças
+
+- Go não tem herança, mas podemos simular heranças usando structs.
+
+- Exemplo
+
+```go
+package main
+
+import "fmt"
+
+// Struct do tipo pessoa
+type pessoa struct {
+	nome string
+	sobrenome string
+	idade int8
+	altura uint8
+	peso float32
+}
+
+// Struct do tipo estudante
+type estudante struct {
+	// Passamos o nome da nossa struct que queremos "herdar". Não é necessário passar o tipo.
+	pessoa
+	curso string
+	faculdade string
+}
+
+func main() {
+	// Declaramos uma variável chamada pessoaUm do tipo pessoa e setamos alguns valores.
+	pessoaUm := pessoa {
+		"Douglas",
+		"Cunha de Jesus",
+		23,
+		172,
+		68.5,
+	}
+
+	// Exibe: {Douglas Cunha de Jesus 23 172 68.5}
+	fmt.Println(pessoaUm)
+
+	// Declaramos uma variável chamada estudanteUm do tipo estudante e passamos uma struct(pessoaUm) e setamos dois valores.
+	estudanteUm := estudante {
+		pessoaUm,
+		"Sistemas de Informação",
+		"Universidade Federal de Sergipe",
+	}
+
+	// Exibe: {{Douglas Cunha de Jesus 23 172 68.5} Sistemas de Informação Universidade Federal de Sergipe}
+	fmt.Println(estudanteUm)
+
+	// Para acessar as variáveis da struct pessoa basta usar a notação dot(.) seguido do nome da variável.
+
+	fmt.Println(estudanteUm.nome)
+	fmt.Println(estudanteUm.sobrenome)
+	fmt.Println(estudanteUm.idade)
+	fmt.Println(estudanteUm.altura)
+	fmt.Println(estudanteUm.peso)
+	fmt.Println(estudanteUm.curso)
+	fmt.Println(estudanteUm.faculdade)
+}
+```
+
+- Ou seja, para usarmos "herança" em Go, basta passar uma struct como valor de uma variável de outra struct. Como é o caso da struct estudante que recebeu a struct pessoa como valor. Para exibir os valores das variáveis da struct pessoa, basta usar a notação dot(.) seguido do nome da variável.
+
 
 [Voltar](../README.md)
