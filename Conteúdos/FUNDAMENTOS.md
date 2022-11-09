@@ -1338,6 +1338,105 @@ Note que em Go não é necessário colocar o break no final de cada case. O Go j
 
 ## Estruturas de Repetição
 
-As estruturas de repetição são utilizadas para executar um bloco de código várias vezes. Existem três estruturas de repetição em Go: **for, for range e for infinito.**
+As estruturas de repetição são utilizadas para executar um bloco de código várias vezes. Existem três estruturas de repetição em Go: **for e for range**
+
+- Estrutura for
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	i := 0
+
+	// Leia: Enquanto i for menor que 10, faça algo.
+	for i < 10 {
+
+		// Incrementa a variável i em uma unidade a cada loop.
+		i++
+		// "Para" o código por um segundo.
+		time.Sleep(time.Second)
+		fmt.Println("Incrementando i: ", i)
+	}
+
+	fmt.Println("Valor final do i: ", i)
+
+	// Usando a notação init temos
+	for j := 0; j <= 10; j++ {
+		fmt.Println("Incrementando j", j)
+		time.Sleep(time.Second)
+	}
+}
+```
+
+No exemplo acima usamos a estrutura for, onde passamos uma condição `i < 10` e `j <= 10`. Caso a condição seja verdadeira, o bloco de código é executado, caso contrário, o bloco de código é ignorado. Além disso, usamos a notação init, onde declaramos uma variável e inicializamos ela dentro do for. Essa variável só existe dentro do for, ou seja, não pode ser acessada fora do for.
+
+- Estrutura for range
+
+A estrutura for range é utilizada para percorrer um array, slice, map ou string. Veja o exemplo abaixo:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	// A estutura for range é usado quando queremos iterar sobre arrays, strings, maps etc.
+	// Declaramos um array do tipo string contendo três strings.
+	nomes := [3] string {
+		"Douglas",
+		"Lucas",
+		"Marcel",
+	}
+
+	// Iterando sobre o array
+	// Declaramos duas variáveis, o índice e o valor do array, em seguida usamos range e o nome do array.
+	for index, value := range nomes {
+		// Exibe o índice e o valor.
+		fmt.Println(index, value)
+	}
+
+	// Caso não queiramos o índice, basta usar o underline.
+	for _, value := range nomes {
+		// Exibe Douglas, Lucas e Marcel.
+		fmt.Println(value)
+	}
+
+	// Iterando sobre strings
+	for index, letra := range "PALAVRA" {
+		// Nesse caso exibe o índice e o valor da letra na tabela ASCII.
+		fmt.Println(index, letra)
+	}
+
+	fmt.Println("---------------------")
+
+	// Para usar a letra no lugar do número da tabela ASCII basta usar a função string().
+	// Iterando sobre strings
+	for index, letra := range "PALAVRA" {
+		// Nesse caso exibe o índice e cada letra durante a execução do loop.
+		fmt.Println(index, string(letra))
+	}
+
+	// Iterando sobre um map
+	usuario := map[string] string {
+		"nome": "Douglas",
+		"sobrenome": "Cunha",
+	}
+
+	// Para iterar sobre um map, primeiro temos uma chave e depois um valor.
+	fmt.Println("-------------------------------------")
+	for chave, valor := range usuario {
+		fmt.Println("Chave:", chave, "\nValor:", valor)
+	}
+}
+```
+
+Em resumo, a estrutura for range é utilizada para percorrer um array, slice, map ou string. Para cada iteração, o for range retorna o índice e o valor do array, slice, map ou string. Caso não queiramos o índice, basta usar o underline. Para usar a letra no lugar do número da tabela ASCII basta usar a função string(). Para iterar sobre um map, primeiro temos uma chave e depois um valor. Por fim, Go não permite iterar sobre uma struct.
 
 [Voltar](../README.md)
