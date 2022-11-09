@@ -1439,4 +1439,205 @@ func main() {
 
 Em resumo, a estrutura for range é utilizada para percorrer um array, slice, map ou string. Para cada iteração, o for range retorna o índice e o valor do array, slice, map ou string. Caso não queiramos o índice, basta usar o underline. Para usar a letra no lugar do número da tabela ASCII basta usar a função string(). Para iterar sobre um map, primeiro temos uma chave e depois um valor. Por fim, Go não permite iterar sobre uma struct.
 
+## Retorno Nomeado de Funções
+
+Em Go, é possível retornar mais de um valor de uma função. Além disso, podemos dar nomes aos valores de retorno. Veja o exemplo abaixo:
+
+```go
+package main
+
+import "fmt"
+
+// Note que no nosso retorno nós passamos dois nomes, soma e subtracao.
+func calculosMatematicos(n1, n2 int) (soma int, subtracao int) {
+	// Realizamos o cálculo no retorno da função
+	soma = n1 + n2
+	subtracao = n1 - n2
+	// Passamos return no final.
+	return
+}
+
+func main() {
+	// Chamamos a função e armazenamos os seus respectivos valores.
+	soma, subtracao := calculosMatematicos(5, 2)
+	// Exibe 7 e 3.
+	fmt.Println(soma, subtracao)
+}
+```
+
+Note que no exemplo acima nós passamos dois valores como retorno e dois nomes para os valores de retorno. Em seguida, realizamos o cálculo no retorno da função e passamos return no final. Por fim, chamamos a função e armazenamos os seus respectivos valores. Funções com retorno nomeado deixa nosso código mais legível e organizado.
+
+## Funções Variáticas
+
+Em Go, é possível passar uma quantidade variável de argumentos para uma função. Para isso, basta usar três pontos antes do tipo do argumento. Veja o exemplo abaixo:
+
+```go
+package main
+
+import "fmt"
+
+// Passamos um parâmetro seguido de três pontos e o tipo de dado do parâmetro + o tipo de dado de retorno.
+func soma(numeros ...int) int {
+	// Criamos um contador
+	total := 0
+	// Usamos o for para percorrer o slice que é gerado pela quantidade de parâmetros.
+	for _, numero := range numeros {
+		// Somamos o numero no parâmetro com o total.
+		total += numero
+	}
+	// Retornamos o total.
+	return total
+}
+
+// Função que recebe uma string e uma sequência de números.
+func escrever(texto string, numeros ...int) {
+	// Percorre o slice numeros e exibe na tela a string e o numero.
+	for _, numero := range numeros {
+		fmt.Println(texto, numero)
+	}
+}
+
+func main() {
+	// Chamamos a função passando 11 parâmetros e armazenamos o resultado.
+	totalDaSoma := soma(1, 5, 10, 20, 100, 350, 3, 2, 1, 6, 123)
+
+	// Exibe 621.
+	fmt.Println(totalDaSoma)
+
+	// Chamamos a função e passamos os dois argumentos.
+	escrever("Olá, mundo!", 10, 20, 30, 40, 50)
+}
+```
+
+Em resumo, funções variáticas são funções que recebem uma quantidade variável de argumentos. Para isso, basta usar três pontos antes do tipo do argumento. Além disso, só podemos ter um parâmetro variático por função.
+
+## Funções Anônimas
+
+Em Go, é possível criar funções sem nome. Essas funções são chamadas de funções anônimas. Veja o exemplo abaixo:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// Função anônima que exibe Hello, world! na tela.
+	func () {
+		fmt.Println("Hello, world!")
+	}() // É obrigatório o uso do parênteses no final.
+
+	// Usando parâmetros em funções anônimas
+	// Declaramos o parâmetro e o tipo e passamos o argumento dentro dos parênteses.
+	func (user string) {
+		fmt.Println("Olá", user)
+	} ("Douglas")
+
+	// Podemos criar uma função anônima que retorna algo e armazenar ela em uma variável.
+	retorno := func (texto string) string {
+		// A função Sprintf formata a saída, note que passamos %s que significa que queremos exibir o valor do texto que é do tipo string.
+		return fmt.Sprintf("Retornando: %s", texto)
+	}("Olá, eu sou um texto :)")
+	// Exibimos o resultado do retorno.
+	fmt.Println(retorno)
+}
+```
+
+Note que no exemplo acima criamos duas funções anônimas, uma exibe Hello, world! na tela e a outra exibe Olá Douglas. Além disso, criamos uma função anônima que retorna algo e armazenamos ela em uma variável. Em resumo, funções anônimas são funções sem nome. Essas funções são muito úteis quando queremos passar uma função como argumento para outra função.
+
+## Funções Recursivas
+
+Em Go, é possível criar funções recursivas. Funções recursivas são funções que chamam a sí próprio n vezes. Veja o exemplo abaixo:
+
+```go
+package main
+
+import "fmt"
+
+// Função recursiva que recebe um inteiro positvo e retorna um inteiro positivo.
+func fibonacci (numero uint) uint {
+	// Caso base de parada
+	if numero <= 1 {
+		return numero
+	}
+	// Caso recursivo
+	return fibonacci(numero - 1) + fibonacci(numero - 2)
+}
+
+func main() {
+	// Armazenamos o valor 5 na variável numero
+	var numero uint = 5
+	// Chamamos a função fibonacci e passamos numero como argumento
+	fmt.Println(fibonacci(numero))
+
+	// Usando a estrutura for para exibir todos os valores da sequência até n valor.
+	// passamos uint(0) indicando que queremos que o for comece em 0.
+	fmt.Println("---------------------")
+	for i := uint(0); i <= numero; i++ {
+		fmt.Println(fibonacci(i))
+	}
+}
+}
+```
+
+A sequência de Fibonacci é uma sequência de números inteiros, começando normalmente por 0 e 1, na qual, cada termo subsequente corresponde à soma dos dois anteriores. A sequência de Fibonacci é uma sequência infinita. No exemplo acima, criamos uma função recursiva que recebe um inteiro positivo e retorna um inteiro positivo. Em seguida, chamamos a função e passamos o valor 5 como argumento. Por fim, exibimos o resultado na tela.
+
+- Note que em funções recursivas é necessário ter um caso base de parada, caso contrário, a função vai entrar em loop infinito gerando um estouro de memória.
+
+- Funções recursivas geram um grande consumo de memória, por isso, é recomendado que se use funções recursivas apenas quando for necessário.
+
+# Defer
+
+Em Go, é possível usar a palavra reservada defer. A palavra defer faz com que uma **função seja executada no final do escopo da função.** Veja o exemplo abaixo:
+
+```go
+package main
+
+import "fmt"
+
+func funcao1() {
+	fmt.Println("Executando a função 1")
+}
+
+func funcao2() {
+	fmt.Println("Executando a função 2")
+}
+
+func alunoEstaAprovado(notaUm, notaDois int) bool {
+	// O defer abaixo é executado antes da estrutura if.
+	defer fmt.Println("Média calculada. Resultado será retornado") // Executa em seguida
+	fmt.Println("Entrando na função para verificar se o aluno foi aprovado") // Executa primeiro
+
+	media := (notaUm + notaDois) / 2
+
+	// Por fim, retorna true ou false.
+	if media >= 6 {
+		return true
+	} else {
+		return false
+	}
+}
+
+func main() {
+	// Chamando as duas funções
+	funcao1()
+	funcao2()
+
+
+	// DEFER = ADIAR.
+
+	fmt.Println("---------------------")
+	// Usando a palavra-reservada defer
+	// defer faz com que a execução da função 1 se dê apenas quando a função 2 for executada.
+	defer funcao1()
+	funcao2()
+
+	fmt.Println("---------------------")
+
+	// Note que primeiro executamos a função alunoEstaReprovado e a funcao1 é executada por último.
+	fmt.Println(alunoEstaAprovado(7, 8))
+}
+```
+
+Note que na função alunoEstaAprovado nós usamos a palavra-reservadad defer em um fmt.Println. Isso quer dizer que a função Println será executada antes da estrutura if, isso se deve ao fato da estrutura if possuir retorno. Ou seja, defer "retarda" a execução da função até o final do escopo da função.
+
 [Voltar](../README.md)
