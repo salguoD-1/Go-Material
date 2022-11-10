@@ -1638,6 +1638,139 @@ func main() {
 }
 ```
 
-Note que na função alunoEstaAprovado nós usamos a palavra-reservadad defer em um fmt.Println. Isso quer dizer que a função Println será executada antes da estrutura if, isso se deve ao fato da estrutura if possuir retorno. Ou seja, defer "retarda" a execução da função até o final do escopo da função.
+Note que na função alunoEstaAprovado nós usamos a palavra-reservada defer em um fmt.Println. Isso quer dizer que a função Println será executada antes da estrutura if, isso se deve ao fato da estrutura if possuir retorno. Ou seja, defer "retarda" a execução da função até o final do escopo da função.
+
+## Panic e Recover
+
+Em Go, é possível matar a execução do nosso programa usando a função panic. Para recuperar a execução do programa, usamos a função recover. Veja o exemplo abaixo:
+
+```go
+package main
+
+import "fmt"
+
+func recuperarExecucao() {
+	// Usando a função recover
+	if r := recover(); r != nil {
+		fmt.Println("Execução recuperada com sucesso!")
+	}
+}
+
+func alunoEstaAprovado(notaUm, notaDois float64) bool {
+	defer recuperarExecucao()
+	media := (notaUm + notaDois) / 2
+	if media > 6 {
+		return true
+	} else if media < 6 {
+		return false
+	}
+
+	// Faz o sistema entrar em "panico" e mata a execução do programa.
+	panic("A MÉDIA É EXATAMENTE 6")
+}
+
+func main() {
+	fmt.Println(alunoEstaAprovado(6, 6))
+	fmt.Println("Pós execução!")
+}
+```
+
+Resultado:
+
+```bash
+go run panic-recover.go
+Execução recuperada com sucesso!
+false
+Pós execução!
+```
+
+A função panic faz com que o programa entre em pânico e seja interrompido. A função recover faz com que o programa seja recuperado e continue a execução. Note que utilizamos um if init para verificar se o valor de r é diferente de nil. Isso se deve ao fato de que a função recover retorna um valor do tipo interface, ou seja, pode retornar qualquer tipo de dado. Por isso, é necessário verificar se o valor retornado é diferente de nil. Para mais informações acesse a [documentação.](https://pkg.go.dev/builtin#recover)
+
+## Função Closure
+
+Em Go, é possível criar funções anônimas. Essas funções anônimas são chamadas de closures. Veja o exemplo abaixo:
+
+```go
+package main
+
+import "fmt"
+
+func closure() func() {
+	// Variável texto da função closure.
+	texto := "Dentro da função closure!"
+
+	// A função closure acessa a variável externa a ela.
+	funcao := func() {
+		fmt.Println(texto)
+	}
+
+	return funcao
+}
+
+func main() {
+	texto := "Dentro da função main"
+	fmt.Println(texto)
+
+	// Armazenamos o resultado da função e chamamos a funcaoNova.
+	funcaoNova := closure()
+	funcaoNova()
+}
+```
+
+Ou seja, closures são funções que podem acessar variáveis externas a elas. Isso é possível porque closures são funções que retornam funções.
+
+## Funções com Ponteiros
+
+Em Go, é possível usar ponteiros em funções. Veja o exemplo abaixo:
+
+```go
+package main
+
+import "fmt"
+
+// A função abaixo recebe um ponteiro de int
+func inverterSinal(numero *int) {
+	// Usamos o ponteiro de int e retornamos o seu valor com o sinal trocado.
+	// Note que não usamos o return, pois a alteração é feito diretamente no endereço de memória.
+	*numero = *numero * -1
+}
+
+func main() {
+	numero := 20
+	// Chamamos a função numero passando a variável e o local da memoria em que a variável numero está.
+	inverterSinal(&numero)
+	// Retorna o valor da variável com sinal trocado.
+	fmt.Println(numero)
+}
+```
+
+Basicamente o que fazemos é passar o endereço de memória da variável para a função. Dessa forma, a função pode alterar o valor da variável diretamente no endereço de memória. Dizemos que estamos passando um valor por referência. Note que a função não faz uso da palavra-reservada return, pois ela altera o valor da variável diretamente no endereço de memória.
+
+## Função init
+
+Em Go, é possível criar uma função init. Essa função é executada antes da função main. Veja o exemplo abaixo:
+
+```go
+package main
+
+import "fmt"
+
+// A função init é executada antes da função main().
+func init() {
+	fmt.Println("Executado a função init")
+}
+
+func main() {
+	fmt.Println("Função main sendo executada")
+}
+```
+
+A função init() é executada antes da função main(). Além disso, só pode existir uma função init() por arquivo e não por pacote.
+
+## Métodos
+
+Em Go, é possível criar métodos. Métodos são funções que pertencem a uma estrutura. Veja o exemplo abaixo:
+
+```go
 
 [Voltar](../README.md)
