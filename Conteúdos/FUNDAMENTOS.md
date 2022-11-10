@@ -1819,4 +1819,94 @@ func main() {
 
 Ou seja, **métodos são funções que pertencem a uma estrutura**. Para criar um método, basta **passar a estrutura como parâmetro da função.** Dessa forma, podemos **acessar os atributos da estrutura.** Além disso, note que podemos **passar a estrutura por referência**. Dessa forma, podemos **alterar o valor da variável diretamente no endereço de memória.** Ou seja, usamos um ponteiro de struct.
 
+## Interfaces
+
+Em Go, é possível criar interfaces. Interfaces são tipos abstratos que definem um conjunto de métodos. Veja o exemplo abaixo:
+
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+// Uma interface do tipo forma.
+type forma interface {
+	// Método area() que retorna um valor do tipo float64.
+	area() float64
+}
+
+// A função escreverArea recebe uma interface e retorna o método area().
+// Nota: Para usar o método area() é necessário que o struct retangulo ou circulo tenha um método chamado area() do tipo float64.
+func escreverArea(f forma) {
+	fmt.Printf("A área da forma é %0.2f\n", f.area())
+}
+
+// Criamos uma função area() da struct retangulo.
+func (r retangulo) area() float64 {
+	return r.altura * r.largura
+}
+
+// Criamos um método area que recebe uma struct chamada circulo.
+func (c circulo) area() float64 {
+	return math.Pi * (c.raio * c.raio)
+}
+
+type retangulo struct {
+	altura float64
+	largura float64
+}
+
+type circulo struct {
+	raio float64
+}
+
+
+
+func main() {
+	r := retangulo {
+		10,
+		15,
+	}
+
+	c := circulo {
+		10,
+	}
+
+	// Exibimos o resultado.
+	escreverArea(r)
+	escreverArea(c)
+}
+```
+
+Ou seja, interfaces armazenam um conjunto de métodos. Dessa forma, podemos criar uma interface e passar uma estrutura que tenha os métodos da interface. Além disso, podemos criar uma função que recebe uma interface como parâmetro. Dessa forma, podemos passar uma estrutura que tenha os métodos da interface.
+
+**NOTA:** `Para usar os métodos da interface é necessário que a estrutura(struct) tenha os métodos da interface, obedecendo o nome e o tipo de retorno do método da interface, como é o caso do método area() acima.`
+
+## Interfaces genéricas
+
+Em Go, é possível criar interfaces genéricas. Interfaces genéricas são interfaces que não possuem métodos. Veja o exemplo abaixo:
+
+```go
+package main
+
+import "fmt"
+
+// A função generica recebe um argumento do tipo interface.
+func generica(interf interface{}) {
+	fmt.Println(interf)
+}
+
+func main() {
+	// Note que podemos passar qualquer tipo de dado que será exibido. Por isso o "genérico".
+	generica("String") // String
+	generica(12) // int
+	generica(12.3) // float
+	generica(true) // bool
+}
+```
+
+Ou seja, interfaces genéricas são interfaces que não possuem métodos. Dessa forma, podemos passar qualquer tipo de dado para a função que possui uma interface genérica como parâmetro. Além disso, podemos usar a função `fmt.Println()` que possui uma interface genérica como parâmetro.
+
 [Voltar](../README.md)
