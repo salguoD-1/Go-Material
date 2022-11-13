@@ -7,3 +7,4 @@ Material completo de estudo da linguagem Go. Esse material faz parte do curso [A
 | ------------------------------------------------------ |
 | [Introdução](./Conteúdos/INTRODUÇÃO.md)                |
 | [Fundamentos da Linguagem](./Conteúdos/FUNDAMENTOS.md) |
+| [Concorrência](./Conteúdos/CONCORRÊNCIA.md)            |
