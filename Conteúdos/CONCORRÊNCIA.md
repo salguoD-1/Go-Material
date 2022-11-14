@@ -376,4 +376,105 @@ O padrão worker pool é muito utilizado para resolver problemas relacionados a 
 
 Note que a função worker possui o canal tarefas que especificamos(usando <- antes do chan) como sendo um canal de entrada, ou seja, ele só recebe dados. Já o canal resultados é um canal de saída(especificamos usando <- depois do chan), ou seja, ele só envia dados. Isso é muito importante para evitar que os dados sejam enviados para o canal errado.
 
+### Padrão Generator
+
+O padrão generator é utilizado para encapsular a lógica de um canal. Nesse padrão, temos uma função que retorna um canal. Essa função é responsável por enviar os dados para o canal.
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	// A variável é um canal do tipo "recebe dados"
+	canal := escrever("Olá, mundo!")
+
+	// Chamamos o canal 10 vezes.
+	for i := 0; i < 10; i++ {
+		// Passamos o canal
+		fmt.Println(<-canal)
+	}
+}
+
+// Retorna um canal do tipo string
+func escrever(texto string) <-chan string {
+	canal := make(chan string)
+
+	go func() {
+		for {
+			canal <- fmt.Sprintf("Valor recebido: %s", texto)
+			time.Sleep(time.Millisecond * 500)
+		}
+	}()
+
+	return canal
+}
+```
+
+Note que a função escrever ela retorna um canal do tipo string. Isso é possível porque o canal é um tipo de dado. Nesse exemplo, nós criamos um canal e passamos esse canal para uma função anônima. Essa função anônima é responsável por enviar dados para o canal. Porém, nós não podemos enviar dados para o canal diretamente, pois ele é um canal de saída. Para isso, nós criamos uma função que retorna um canal do tipo string. Essa função é responsável por enviar os dados para o canal. Em seguida, criamos uma variável canal na função main que recebe o canal retornado pela função escrever. Por fim, nós chamamos o canal 10 vezes para exibir os dados na tela.
+
+### Padrão Multiplexador
+
+O padrão multiplexador é utilizado para receber dados de vários canais. Nesse padrão, temos uma função que recebe vários canais e retorna um canal. Essa função é responsável por receber os dados de todos os canais e enviar para um **único canal.**
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	// Chamamos a função multiplexar passando a função escrever duas vezes, elas retornam um canal cada uma
+	canal := multiplexar(escrever("Olá, mundo!"), escrever("Programando em Go!"))
+
+	for i := 0; i < 10; i++ {
+		fmt.Println(<-canal)
+	}
+}
+
+
+// Passamos dois canais de saída do tipo string que retorna um canal do tipo string
+func multiplexar(canalDeEntrada1, canalDeEntrada2 <- chan string) <-chan string {
+	// Canal de saída
+	canalDeSaida := make(chan string)
+
+
+	// Analisamos se os canais de entrada estão passando algum dado, caso estejam enviam para o canal de saída.
+	go func() {
+		for {
+			select {
+			case mensagem := <- canalDeEntrada1:
+				canalDeSaida <- mensagem
+			case mensagem := <- canalDeEntrada2:
+				canalDeSaida <- mensagem
+			}
+		}
+	}()
+
+	// Retorna o canal de saída
+	return canalDeSaida
+}
+
+// Retorna um canal do tipo string
+func escrever(texto string) <-chan string {
+	canal := make(chan string)
+
+	go func() {
+		for {
+			canal <- fmt.Sprintf("Valor recebido: %s", texto)
+			time.Sleep(time.Millisecond * 500)
+		}
+	}()
+
+	return canal
+}
+```
+
+Ou seja, a ideia do padrão multiplexar é juntar dois ou mais canais em um único canal. Para isso, nós criamos uma função que recebe dois canais de entrada e retorna um canal de saída. Essa função é responsável por receber os dados de todos os canais e enviar para um único canal. Em seguida, nós criamos uma variável canal na função main que recebe o canal retornado pela função multiplexar. Por fim, nós chamamos o canal 10 vezes para exibir os dados na tela.
+
 [Voltar](../README.md)
